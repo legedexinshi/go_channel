@@ -19,7 +19,7 @@ class Chan {
 		}
 	}
 
-	int send(T data) {
+	int send(T *data) {
 		unique_lock<mutex> w_lk(_w_mutex);
 		if (!_buffered) {
 			return unbuffered_send(data);
@@ -43,13 +43,13 @@ class Chan {
 		_cond.notify_one();
 		return read(_pipe[0], data, sizeof(T)) > 0? 0: -1;
 	}
-	int unbuffered_send(T data) {
+	int unbuffered_send(T *data) {
 		unique_lock<mutex> _lk(_inter_mutex);
 		_send_num++;
 		_cond.wait(_lk, [this]{return this->_recv_num > 0;});
 		_send_num--;
 		_recv_num--;
-		return write(_pipe[1], &data, sizeof(T)) > 0? 0: -1;
+		return write(_pipe[1], data, sizeof(T)) > 0? 0: -1;
 	}
 
 };
