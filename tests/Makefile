@@ -1,4 +1,4 @@
-EXEC = test_unbuffered test_buffered test_pointer
+EXEC = test_unbuffered test_buffered test_pointer test_close
 
 all : $(EXEC)
 
