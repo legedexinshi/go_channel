@@ -8,12 +8,12 @@ Chan<char*> chan;
 char ch[]="Hello World";
 
 void sendFun() {
-	char *pp = ch;
-	chan.send(&pp);
+	chan.send(ch);
+	printf("send ok\n");
 }
 void recvFun() {
 	char *ch;
-	chan.recv(&ch);
+	chan.recv(ch);
 	printf("%s\n", ch);
 }
 

@@ -1,8 +1,9 @@
-all : test test2
-test : test.cpp
-	g++ test.cpp -std=c++11 -o test
-test2 : test2.cpp
-	g++ test2.cpp -std=c++11 -o test2
+EXEC = test_unbuffered test_buffered test_pointer
+
+all : $(EXEC)
+
+%: %.cpp
+	g++ -std=c++11 $@.cpp -o $@
 
 clean :
-	rm test test2
+	rm $(EXEC)

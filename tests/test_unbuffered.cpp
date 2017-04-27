@@ -10,7 +10,7 @@ mutex _m;
 void sendFun() {
 	int sum = 0;
 	for (int i = 1; i <= cnt; i++) {
-		if (-1 == ch.send(&i)) printf("error\n");
+		if (-1 == ch.send(i)) printf("error\n");
 		sum += i;
 	}
 	unique_lock<mutex> lk(_m);
@@ -21,7 +21,7 @@ void recvFun() {
 	int sum = 0;
 	for (int i = 1; i <= cnt; i++) {
 		int x;
-		if (-1 == ch.recv(&x)) printf("error\n");
+		if (-1 == ch.recv(x)) printf("error\n");
 		sum += x;
 	}
 	unique_lock<mutex> lk(_m);
